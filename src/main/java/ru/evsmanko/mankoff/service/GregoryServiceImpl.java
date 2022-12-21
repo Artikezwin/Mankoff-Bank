@@ -18,7 +18,7 @@ public class GregoryServiceImpl implements GregoryService {
     private final UserRepository userRepository;
 
     @Override
-    public void exportUserInJson(long id) {
+    public User exportUserInJson(long id) {
         User user = userRepository.getUserById(id);
         File file = new File("jsons/user" + id + ".json");
         if (!file.exists()) {
@@ -35,5 +35,6 @@ public class GregoryServiceImpl implements GregoryService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return user;
     }
 }
