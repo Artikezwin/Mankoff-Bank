@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.evsmanko.mankoff.entity.User;
+import ru.evsmanko.mankoff.exception.UserNotFoundException;
 import ru.evsmanko.mankoff.repository.UserRepository;
 
 import java.io.File;
@@ -20,6 +21,7 @@ public class GregoryServiceImpl implements GregoryService {
     @Override
     public User exportUserInJson(long id) {
         User user = userRepository.getUserById(id);
+        if(user == null) throw  new UserNotFoundException();
         File file = new File("jsons/user" + id + ".json");
         if (!file.exists()) {
             try {
