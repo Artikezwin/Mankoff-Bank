@@ -17,10 +17,6 @@ public class GregoryController {
     @GetMapping("/{id}")
     public ResponseEntity<User> exportUserInJson(@PathVariable("id") long id) {
         User user = gregoryService.exportUserInJson(id);
-        if (user != null) {
             return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            return ResponseEntity.noContent().build();
-        }
     }
 }
