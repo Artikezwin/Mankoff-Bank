@@ -26,7 +26,6 @@ import java.io.IOException;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@ActiveProfiles("test")
 public class GregoryServiceTest {
 
     @Mock
@@ -36,7 +35,6 @@ public class GregoryServiceTest {
     @InjectMocks
     private GregoryServiceImpl gregoryService;
 
-    @Value("${app.fileJsonName}")
     private String fileJsonName = "jsons/user.json";
 
     @DisplayName("Тест на экспорт данных пользователя в json по id, ожидаемый результат получен")
