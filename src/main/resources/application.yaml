@@ -7,3 +7,6 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+
+app:
+  fileJsonName: jsons/user.json

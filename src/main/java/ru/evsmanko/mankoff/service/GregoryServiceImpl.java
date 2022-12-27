@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.evsmanko.mankoff.configuration.AppProperties;
 import ru.evsmanko.mankoff.entity.User;
 import ru.evsmanko.mankoff.exception.UserNotFoundException;
 import ru.evsmanko.mankoff.repository.UserRepository;
@@ -17,12 +18,13 @@ import java.io.IOException;
 public class GregoryServiceImpl implements GregoryService {
 
     private final UserRepository userRepository;
+    private final AppProperties appProperties;
 
     @Override
     public User exportUserInJson(long id) {
         User user = userRepository.getUserById(id);
-        if(user == null) throw  new UserNotFoundException();
-        File file = new File("jsons/user" + id + ".json");
+        if (user == null) throw new UserNotFoundException();
+        File file = new File(appProperties.getFileJsonName());
         if (!file.exists()) {
             try {
                 file.createNewFile();
