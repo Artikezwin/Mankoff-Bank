@@ -10,3 +10,8 @@ spring:
 
 app:
   fileJsonName: jsons/user.json
+
+currency:
+  USD: 1
+  RUB: 70
+  EUR: 1.1
