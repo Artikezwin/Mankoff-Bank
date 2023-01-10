@@ -1,49 +1,66 @@
 package ru.evsmanko.mankoff.testService;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import ru.evsmanko.mankoff.controller.ArtemController;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.core.StringContains.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ArtemRestTest {
-    @Autowired
-    private MockMvc mockMvc;
-    @Autowired
-    private ArtemController controller;
-    @Test
-    public void test() throws Exception{
-        this.mockMvc.perform(get("/"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("hello")));
-    }
-    /*@Test
-    @DisplayName("Интеграционный тест контроллера")
-    public void test(){
-        Debit debit= given()
-                .spec(new RequestSpecBuilder().setPort(port)
-                        .setBasePath("/Artem")
-                        .setBaseUri(URL).build())
-                .get("/average").then().statusCode(HttpStatus.OK.value())
-                .extract().as(Debit.class);
 
-        assertEquals(debit.getUser().getFirstName(), "");
-        /*assertEquals(debitList.get(0).getUser().getFirstName(), "");
-        assertEquals(debitList.get(0).getUser().getLastName(), "");
-        assertEquals(debitList.get(0).getUser().getPhone(), "");
-    }*/
+    @LocalServerPort
+    private int port;
+
+    @Test
+    @DisplayName("Это тест, который я решил написать по человечески чтобы было красиво")
+    void testController() {
+        RestAssured.baseURI = "http://localhost";
+        given()
+                .param("id", "2")
+                .spec(new RequestSpecBuilder().setPort(port).build()).
+        when()
+                .get("/average/currency/rub").
+        then()
+                .assertThat().body(is(Float.toString(178.0F)))
+                .statusCode(200);
+    }
+
+    @Test
+    @DisplayName("Тест поиска среднего в рублях")
+    void testControllerRUB() {
+        RestAssured.
+                when()
+                    .get("http://localhost:" + port + "/average/currency/rub?id=2").
+                then()
+                    .assertThat().body(is(Float.toString(178.0F)))
+                    .statusCode(200);
+    }
+
+    @Test
+    @DisplayName("Тест поиска среднего в $")
+    void testControllerUSD() {
+        RestAssured.
+                when()
+                    .get("http://localhost:" + port + "/average/currency/usd?id=1").
+                then()
+                    .assertThat().body(is(Float.toString(7777777.0F / 70)))
+                    .statusCode(200);
+    }
+
+    @Test
+    @DisplayName("Тест поиска среднего в евро")
+    void testControllerEUR() {
+        RestAssured.
+                when()
+                    .get("http://localhost:" + port + "/average/currency/eur?id=1").
+                then()
+                    .assertThat().body(is(Float.toString(7777777.0F / 70 / 1.1F)))
+                    .statusCode(200);
+    }
 }
