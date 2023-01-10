@@ -14,7 +14,6 @@ import ru.evsmanko.mankoff.service.VeronikaServiceImpl;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,7 +32,7 @@ class VeronikaServiceImplTest {
         Credit credit1 = new Credit(1, user,250000);
         Credit credit2 = new Credit(2, user,200000);
         when(creditRepository.findAllByUserId(userId)).thenReturn(List.of(credit1,credit2));
-        double AmountList = veronikaService.calculateCreditByUser(userId);
-        Assertions.assertEquals(AmountList,450000);
+        Double amountList = veronikaService.calculateCreditByUser(userId);
+        Assertions.assertEquals(amountList,450000);
     }
 }
