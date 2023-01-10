@@ -18,7 +18,7 @@ public class ArtemRestTest {
     private int port;
 
     @Test
-    @DisplayName("Это тест, который я решил написать по человечески чтобы было красиво")
+    @DisplayName("Это тест, который я решил написать по человечески, чтобы было красиво")
     void testController() {
         RestAssured.baseURI = "http://localhost";
         given()
