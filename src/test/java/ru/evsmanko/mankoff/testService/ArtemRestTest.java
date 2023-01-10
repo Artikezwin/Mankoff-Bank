@@ -60,7 +60,7 @@ public class ArtemRestTest {
                 when()
                     .get("http://localhost:" + port + "/average/currency/eur?id=1").
                 then()
-                    .assertThat().body(is(Float.toString(7777777.0F / 70 / 1.1F)))
+                    .assertThat().body(is(Float.toString(7777777.0F / 70.0F / 1.1F)))
                     .statusCode(200);
     }
 }
