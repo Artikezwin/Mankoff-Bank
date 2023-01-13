@@ -16,15 +16,39 @@ class VeronikaControllerIntegrationTest {
     @LocalServerPort
     private int port;
 
-    @DisplayName("Интеграционный тест для контроллера. Ожидаемый рез-тат получен.")
+    @DisplayName("Интеграционный тест для контроллера (rub). Ожидаемый рез-тат получен.")
     @Test
-    public void testVeronikaControllerCalculateCreditByUserThenStatus200() {
+    public void testVeronikaControllerCalculateCreditByUserRub() {
         Double credit = given()
                 .spec(new RequestSpecBuilder().setPort(port)
                         .setBasePath("/calculate")
                         .setBaseUri("http://localhost").build())
-                .get("/credits/2").then().statusCode(HttpStatus.OK.value())
+                .get("/credits/rub/2").then().statusCode(HttpStatus.OK.value())
                 .extract().as(Double.class);
         Assertions.assertEquals(credit, 550.0);
+    }
+
+    @DisplayName("Интеграционный тест для контроллера (usd). Ожидаемый рез-тат получен.")
+    @Test
+    public void testVeronikaControllerCalculateCreditByUserUsd() {
+        Double credit = given()
+                .spec(new RequestSpecBuilder().setPort(port)
+                        .setBasePath("/calculate")
+                        .setBaseUri("http://localhost").build())
+                .get("/credits/usd/2").then().statusCode(HttpStatus.OK.value())
+                .extract().as(Double.class);
+        Assertions.assertEquals(credit, 7.86);
+    }
+
+    @DisplayName("Интеграционный тест для контроллера (eur). Ожидаемый рез-тат получен.")
+    @Test
+    public void testVeronikaControllerCalculateCreditByUserEur() {
+        Double credit = given()
+                .spec(new RequestSpecBuilder().setPort(port)
+                        .setBasePath("/calculate")
+                        .setBaseUri("http://localhost").build())
+                .get("/credits/eur/2").then().statusCode(HttpStatus.OK.value())
+                .extract().as(Double.class);
+        Assertions.assertEquals(credit, 7.14);
     }
 }
