@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mankoff Bank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="container" >
+    <div class="row">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" style="font-size: 25px; text-transform: uppercase;">Mankoff Bank</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Главная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#card">Оформить дебетовую карту</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#clients">Наши клиенты</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<section class="banner">
+    <div class="container">
+        <div class="row fullscreen d-flex align-items-center justify-content-start">
+            <div class="col-sm-6">
+                <h1>Дебетовая карта Mankoff Bank</h1>
+                <p>
+                    Зарабатывайте кэшбэк рублями, а не бонусами. Закажите дебетовую карту с платежной системой «Мир», платите на кассе картой или переводом по номеру телефона
+                </p>
+                <a href="#card">
+                    <div class="cardButton">Оформить карту</div>
+                </a>
+            </div>
+            <div class="col-sm-6 banner-right">
+                <img src="card.png" alt="Картинка карты">
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container" id="card">
+    <section class="mb-4 formochka">
+        <h1 class="h1-responsive font-weight-bold text-center my-3">Оставьте заявку</h1>
+        <p class="text-center w-responsive mx-auto mb-3">Заполните анкету на сайте и мы сообщим решение в течение нескольких минут!</p>
+        <div class="row">
+            <div class="col-md-12 mb-md-0 mb-5">
+                <form class="needs-validation" novalidate id="contactform" th:action="@{/saveProposal}" th:object="${proposal}"
+                      method="POST">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="input-name">ФИО</label>
+                            <input th:field="*{name}" type="text" class="form-control" id="input-name" placeholder="Иванов Иван Иванович" value="" required>
+                            <div class="invalid-feedback">Это поле обязательно.</div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="input-surname">Телефон</label>
+                            <input th:field="*{phoneNumber}" type="text" class="form-control" id="input-surname" placeholder="+79665554433" value="" required>
+                            <div class="invalid-feedback">Это поле обязательно.</div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="input-email">Дата рождения</label>
+                            <input th:field="*{dateBirth}" type="date" class="form-control" id="input-email" placeholder="10.12.2002" required>
+                            <div class="invalid-feedback">Это поле обязательно.</div>
+                        </div>
+                    </div>
+                    <div class="text-center text md-left">
+                        <button class="btnSend" type="submit">Отправить</button>
+                    </div>
+                </form>
+            </div>
+    </section>
+</div>
+
+<div class="container" id="clients" style="margin-bottom: 200px;">
+    <section class="mb-4">
+        <h1 class="h1-responsive font-weight-bold text-center my-3">Наши клиенты</h1>
+        <p class="text-center w-responsive mx-auto mb-3">Эти известные и талантливые люди уже с нами!</p>
+        <div class="row">
+            <div class="col-md-4 mb-4 text-center" th:each="user : ${listUsers}" th:text="${user.getLastName()} + ' ' + ${user.getFirstName()}"></div>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <div class="waves">
+        <div class="wave" id="wave1"></div>
+        <div class="wave" id="wave2"></div>
+        <div class="wave" id="wave3"></div>
+        <div class="wave" id="wave4"></div>
+    </div>
+    <ul class="social_icon">
+        <li><a href="#" target="_blank">
+            <ion-icon name="logo-vk"></ion-icon>
+        </a></li>
+        <li><a href="#" target="_blank">
+            <ion-icon name="logo-instagram"></ion-icon>
+        </a></li>
+        <li><a href="#" target="_blank">
+            <ion-icon name="logo-youtube"></ion-icon>
+        </a></li>
+        <li><a href="#" target="_blank">
+            <ion-icon name="logo-twitter"></ion-icon>
+        </a></li>
+    </ul>
+    <ul class="footmenu">
+        <li><a href="#">Главная</a></li>
+        <li><a href="#card">Оформить карту</a></li>
+        <li><a href="#clients">Наши клиенты</a></li>
+    </ul>
+    <p>ⒸMankoff Bank | Все права защищены</p>
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</body>
+</html>

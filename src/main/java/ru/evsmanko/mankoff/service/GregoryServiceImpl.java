@@ -5,13 +5,16 @@ import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.evsmanko.mankoff.configuration.AppProperties;
+import ru.evsmanko.mankoff.entity.Proposal;
 import ru.evsmanko.mankoff.entity.User;
 import ru.evsmanko.mankoff.exception.UserNotFoundException;
+import ru.evsmanko.mankoff.repository.ProposalRepository;
 import ru.evsmanko.mankoff.repository.UserRepository;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +22,7 @@ public class GregoryServiceImpl implements GregoryService {
 
     private final UserRepository userRepository;
     private final AppProperties appProperties;
+    private final ProposalRepository proposalRepository;
 
     @Override
     public User exportUserInJson(long id) {
@@ -40,5 +44,15 @@ public class GregoryServiceImpl implements GregoryService {
             throw new RuntimeException(e);
         }
         return user;
+    }
+
+    @Override
+    public List<User> getFirstTwelveUsers() {
+        return userRepository.findAll().stream().limit(12).toList();
+    }
+
+    @Override
+    public Proposal saveProposal(Proposal proposal) {
+        return proposalRepository.save(proposal);
     }
 }
