@@ -12,7 +12,6 @@ import ru.evsmanko.mankoff.service.GregoryService;
 @Controller
 @RequiredArgsConstructor
 public class BankInfoController {
-
     private final GregoryService gregoryService;
 
     @GetMapping("/")
@@ -26,5 +25,10 @@ public class BankInfoController {
     public String saveProposal(@ModelAttribute Proposal proposal) {
         gregoryService.saveProposal(proposal);
         return "redirect:/";
+    }
+
+    @GetMapping("/contacts")
+    public String getContacts(){
+        return "contacts";
     }
 }
