@@ -8,7 +8,7 @@
 
 </head>
 <body>
-<div class="pull-center">
+<div class="info-of">
     <h1>Информация о сотрудниках</h1>
     <p class="name">Аноним Анонимович: 8(926)-678-94-53</p>
     <img class="image" src="anonimus.jpg" alt="Сотрудник">
@@ -28,6 +28,9 @@
 <p class="about">Этот товарищ уже не раз и не два выручал коллег своими наставлениями.
     Старейший из всех разработчиков, к нему за советом обращается даже Аноним Анонимович. Уже отошел от дел, но с радостью подскажет вам в случае необходимости.</p>
 
-<!--<input type="text" name="userName" value="James Carrot" th:value="${user.name}" />-->
+<p th:if="${flag == false}" th:text="${angryMessage}" class="end"></p>
+<p th:if="${flag == true}" th:text="${message}" class="end"></p>
+<p th:if="${flag == true}" th:text="${information}" class="about"></p>
+<p th:text="${time}" class="end"></p>
 </body>
 </html>
