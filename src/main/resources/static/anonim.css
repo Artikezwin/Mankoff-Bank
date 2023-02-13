@@ -1,21 +1,45 @@
+.pull-center{
+    text-align: center;
+}
+
+.info-of{
+    text-align: center;
+    margin-top: 40px;
+}
+
+/*.group{*/
+/*    border: 10px solid 	#696969;*/
+/*}*/
+
 .image{
     text-align: center;
-    border: 10px solid #56382d;
-}
-
-.anonim{
     max-width: 320px;
     max-height: 180px;
+    /*background-image: -o-linear-gradient(top, #bbb, #000);*/
 }
 
-.about{
-    font-size: 28px;
-}
-
-.name{
+.work-time{
     font-size: 20px;
 }
 
-body{
-    background: #f4f4f4;
+.about{
+    font-size: 20px;
+    border-left: dashed #696969;
+    padding-left: 40px;
+}
+
+.name{
+    font-size: 24px;
+}
+
+html{
+    background: #111;
+    color: #f4f4f4;
+}
+
+h1 {
+    margin: 0;
+    padding: 20px 0;
+    /*color: #00539F;*/
+    text-shadow: 3px 3px 1px black;
 }
