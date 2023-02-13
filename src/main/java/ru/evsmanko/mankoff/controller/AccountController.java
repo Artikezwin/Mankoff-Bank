@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AccountController {
 
-        @GetMapping("/user")
-        public String userInformation() {
-            return "user-information";
-        }
+    @GetMapping("/user")
+    public String userInformation() {
+        return "user-information";
     }
+
+    @GetMapping("/balance")
+    public String balanceInformation() {
+        return "balance";
+    }
+}
