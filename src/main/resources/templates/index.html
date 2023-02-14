@@ -92,7 +92,9 @@
         <h1 class="h1-responsive font-weight-bold text-center my-3">Наши клиенты</h1>
         <p class="text-center w-responsive mx-auto mb-3">Эти известные и талантливые люди уже с нами!</p>
         <div class="row">
-            <div class="col-md-4 mb-4 text-center" th:each="user : ${listUsers}" th:text="${user.getLastName()} + ' ' + ${user.getFirstName()}"></div>
+            <div class="col-md-4 mb-4 text-center" th:each="user : ${listUsers}">
+                <a th:href="'/user/' + ${user.id}"><p th:text="${user.getLastName()} + ' ' + ${user.getFirstName()}"/></a>
+            </div>
         </div>
     </section>
 </div>

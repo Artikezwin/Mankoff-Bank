@@ -1,11 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User information</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mankoff Bank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<p> Иванов Иван Иванович </p>
-<p>+7(800)5553535</p>
+<div class="container-fluid" >
+    <div class="row">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/" style="font-size: 25px; text-transform: uppercase;">Mankoff Bank</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Главная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost:8080/#card">Оформить дебетовую карту</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost:8080/#clients">Наши клиенты</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <h1 class="h1-responsive font-weight-bold text-center my-3">Информация о пользователе</h1>
+        <div th:each="user : ${userInformation}" class="alert alert-info mt-5">
+            <h3 th:text="${userInformation.getLastName()} + ' ' + ${userInformation.getFirstName()}"/>
+            <h5 class="text-left w-responsive mx-auto mb-3"> Здесь должен быть номер телефона. Однако не в наших правилах разглашать конфиденциальную информацию! </h5></div>
+    </div>
+</div>
+
 </body>
 </html>
