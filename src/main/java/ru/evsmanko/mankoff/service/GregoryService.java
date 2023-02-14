@@ -10,5 +10,5 @@ public interface GregoryService {
     User exportUserInJson(long id);
     List<User> getFirstTwelveUsers();
     Proposal saveProposal(Proposal proposal);
-    User saveUser(UserDTO userDTO);
+    User saveUser(User user);
 }
