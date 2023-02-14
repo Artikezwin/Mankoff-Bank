@@ -36,15 +36,9 @@ public class BankInfoController {
         return "redirect:/";
     }
 
-    private String getDate() {
-        Date dateNow = new Date();
-        SimpleDateFormat formatForDate = new SimpleDateFormat("E dd.MM.yyyy'. Время' hh:mm:ss'.'");
-        return formatForDate.format(dateNow);
-    }
-
     @GetMapping("/contacts")
     public String getContacts(Model model) {
-        String time = "Доступ к сайту был получен: " + getDate();
+        String time = "Доступ к сайту был получен: " + DateNow.getDate();
         String message = "Прежде чем обращаться куда-либо за чем-либо к кому-либо, убедительная просьба, сверьте нынешнее время с рабочим.";
         model.addAttribute("angryMessage", message);
         model.addAttribute("time", time);
@@ -54,7 +48,7 @@ public class BankInfoController {
 
     @GetMapping("/information")
     public String getUser(Model model, @RequestParam long id) {
-        String time = "Доступ к сайту был получен: " + getDate();
+        String time = "Доступ к сайту был получен: " + DateNow.getDate();
         model.addAttribute("time", time);
 
         User user = userRepository.getUserById(id);
