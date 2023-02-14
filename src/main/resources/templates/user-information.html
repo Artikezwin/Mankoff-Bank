@@ -38,8 +38,10 @@
 <div class="container mt-5">
     <div class="row">
         <h1 class="h1-responsive font-weight-bold text-center my-3">Информация о пользователе</h1>
-        <div th:each="user : ${userInformation}" class="alert alert-info mt-5">
-            <h3 th:text="${userInformation.getLastName()} + ' ' + ${userInformation.getFirstName()}"/>
+        <div th:object="${userInformation}" class="alert alert-info mt-5">
+            <h3 th:text="${userInformation.getFirstName()} + ' ' + ${userInformation.getFirstName()}"/>
+            <h3 th:text="'Возраст: ' + ${userInformation.getAge()}"/>
+            <h3 th:text="'Город: ' + ${userInformation.getCity()}"/>
             <h5 class="text-left w-responsive mx-auto mb-3"> Здесь должен быть номер телефона. Однако не в наших правилах разглашать конфиденциальную информацию! </h5></div>
     </div>
 </div>
