@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.evsmanko.mankoff.configuration.AppProperties;
+import ru.evsmanko.mankoff.dto.UserDTO;
 import ru.evsmanko.mankoff.entity.Proposal;
 import ru.evsmanko.mankoff.entity.User;
 import ru.evsmanko.mankoff.exception.UserNotFoundException;
@@ -54,5 +55,9 @@ public class GregoryServiceImpl implements GregoryService {
     @Override
     public Proposal saveProposal(Proposal proposal) {
         return proposalRepository.save(proposal);
+    }
+    @Override
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 }
