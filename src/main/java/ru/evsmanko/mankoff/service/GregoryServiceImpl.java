@@ -56,8 +56,15 @@ public class GregoryServiceImpl implements GregoryService {
     public Proposal saveProposal(Proposal proposal) {
         return proposalRepository.save(proposal);
     }
+
     @Override
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public void saveUser(User user) {
+        userRepository.save(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getPhone(),
+                user.getCity(),
+                user.getAge()
+        );
     }
 }
