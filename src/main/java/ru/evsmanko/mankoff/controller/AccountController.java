@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.evsmanko.mankoff.dto.UserDTO;
+import ru.evsmanko.mankoff.entity.PaymentEntity;
 import ru.evsmanko.mankoff.entity.User;
 import ru.evsmanko.mankoff.service.GregoryService;
 import ru.evsmanko.mankoff.service.VeronikaService;
@@ -38,5 +39,17 @@ public class AccountController {
     @GetMapping("/balance")
     public String balanceInformation() {
         return "balance";
+    }
+
+    @GetMapping("/payments/{id}")
+    public String paymentByShopperId(Model model, @PathVariable("id") long id) {
+        model.addAttribute("payments", veronikaService.getAllByShopperId(id));
+        return "user-payments";
+    }
+
+    @PostMapping("/payment/add")
+    public String savePayment(@ModelAttribute PaymentEntity paymentEntity) {
+        veronikaService.savePayment(paymentEntity);
+        return "redirect:/";
     }
 }
