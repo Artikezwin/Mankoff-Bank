@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--//    private Long transferId;-->
+<!--//    private Long receiverId;-->
+<!--//    private Long senderId;-->
+<!--//    private float sum;-->
+<!--//    private Timestamp timestamp = null;-->
+<body>
+    <p>Введите информацию для транзакции</p>
+    <form th:method="POST" th:object="${newTransfer}" th:action="@{/transfer/save}">
+        <div>
+            <label for="transferId">ID транзакции: </label>
+            <input type="text" th:field="*{transferId}" id="transferId">
+            <br>
+
+            <label for="receiverId">ID получателя: </label>
+            <input type="text" th:field="*{receiverId}" id="receiverId">
+            <br>
+
+            <label for="senderId">ID отправителя: </label>
+            <input type="text" th:field="*{senderId}" id="senderId">
+            <br>
+
+            <label for="sum">сумма перевода: </label>
+            <input type="text" th:field="*{sum}" id="sum">
+            <br>
+
+            <input type="submit" value="Добавить транзакцию"/>
+        </div>
+
+    </form>
+</body>
+</html>
