@@ -32,6 +32,6 @@ public class VeronikaServiceImpl implements VeronikaService {
 
     @Override
     public User getUserInformationById(long id) {
-        return userRepository.getUserById(id);
+        return userRepository.findUserById(id);
     }
 }

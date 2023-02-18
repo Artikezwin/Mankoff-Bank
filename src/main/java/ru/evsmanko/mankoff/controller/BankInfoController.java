@@ -10,12 +10,6 @@ import ru.evsmanko.mankoff.repository.UserRepository;
 import ru.evsmanko.mankoff.service.ArtemServiceImpl;
 import ru.evsmanko.mankoff.service.GregoryService;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-
 @Controller
 @RequiredArgsConstructor
 public class BankInfoController {
@@ -51,7 +45,7 @@ public class BankInfoController {
         String time = "Доступ к сайту был получен: " + DateNow.getDate();
         model.addAttribute("time", time);
 
-        User user = userRepository.getUserById(id);
+        User user = userRepository.findUserById(id);
 
         String message = "Добро пожаловать в хранилище информации. Здесь есть все о наших клиентах. Да, мы за деньги выдаем их персанальные данные. Не вижу в этом ничего такого.";
         model.addAttribute("message", message);
