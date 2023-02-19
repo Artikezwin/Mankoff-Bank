@@ -17,7 +17,6 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-//@ResponseBody
 public class AccountController {
 
     private final VeronikaService veronikaService;
@@ -44,9 +43,18 @@ public class AccountController {
         return "balance";
     }
 
-    @GetMapping("/get-transfers/{id}")
-    public String listOfTransfers(@PathVariable("id") long userId, Model model){
+    @GetMapping("/get-transfer/{id}")
+    public String getTransfer(@PathVariable("id") long userId, Model model){
         List<Transfer> lst = transferRepository.findTransfersBySenderId(userId);
+        if(!lst.isEmpty()){
+            model.addAttribute("transfers", lst);
+        }
+        return "transfers";
+    }
+
+    @GetMapping("/get-transfers")
+    public String listOfTransfers(Model model){
+        List<Transfer> lst = transferRepository.findAll();
         if(!lst.isEmpty()){
             model.addAttribute("transfers", lst);
         }
