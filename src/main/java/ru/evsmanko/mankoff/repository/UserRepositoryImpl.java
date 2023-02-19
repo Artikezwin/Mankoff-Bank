@@ -54,7 +54,8 @@ public class UserRepositoryImpl implements UserRepository{
                 .addValue("phone", user.getPhone())
                 .addValue("city", user.getCity())
                 .addValue("age", user.getAge()));
-        return getUserById(id);
+        user.setId(id);
+        return user;
     }
 
     @Override
