@@ -13,9 +13,6 @@
     <p>Введите информацию для транзакции</p>
     <form th:method="POST" th:object="${newTransfer}" th:action="@{/transfer/save}">
         <div>
-            <label for="transferId">ID транзакции: </label>
-            <input type="text" th:field="*{transferId}" id="transferId">
-            <br>
 
             <label for="receiverId">ID получателя: </label>
             <input type="text" th:field="*{receiverId}" id="receiverId">

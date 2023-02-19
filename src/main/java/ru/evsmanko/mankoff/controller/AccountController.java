@@ -53,31 +53,6 @@ public class AccountController {
         return "transfers";
     }
 
-//    private Long transferId;
-//    private Long receiverId;
-//    private Long senderId;
-//    private float sum;
-//    private Timestamp timestamp = null;
-    @PostMapping("/addTransfer")
-    public String saveTransfer(@RequestParam("transferId") long transferId,
-                               @RequestParam("receiverId") long receiverId,
-                               @RequestParam("senderId") long senderId,
-                               @RequestParam("sum") long sum,
-                               Model model){
-        Transfer transfer = new Transfer();
-
-        transfer.setTransferId(transferId);
-        transfer.setReceiverId(receiverId);
-        transfer.setSenderId(senderId);
-        transfer.setSum(sum);
-
-        transferRepository.save(transfer);
-
-        model.addAttribute("addedTransfer", new Transfer());
-
-        return "successPage";
-    }
-
     @GetMapping("/transfer/save")
     public String newTransfer(Model model){
         model.addAttribute("newTransfer", new Transfer());

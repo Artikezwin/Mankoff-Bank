@@ -5,9 +5,7 @@ import lombok.*;
 
 import java.sql.Timestamp;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Entity
 @Table(name = "transfer")
 @AllArgsConstructor
