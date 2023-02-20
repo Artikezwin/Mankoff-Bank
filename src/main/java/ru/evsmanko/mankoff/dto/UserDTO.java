@@ -1,8 +1,12 @@
 package ru.evsmanko.mankoff.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@Setter
 public class UserDTO {
     private Long id;
     private String firstName;
