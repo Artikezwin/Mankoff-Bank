@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.evsmanko.mankoff.dto.UserDTO;
+import ru.evsmanko.mankoff.entity.PaymentEntity;
 import ru.evsmanko.mankoff.entity.Transfer;
 import ru.evsmanko.mankoff.entity.User;
 import ru.evsmanko.mankoff.repository.TransferRepository;
@@ -72,5 +73,18 @@ public class AccountController {
         transferRepository.save(transfer);
         return "redirect:/contacts";
     }
+
+    @GetMapping("/payments/{id}")
+    public String paymentByShopperId(Model model, @PathVariable("id") long id) {
+        model.addAttribute("payments", veronikaService.getAllByShopperId(id));
+        return "user-payments";
+    }
+
+    @PostMapping("/payment/add")
+    public String savePayment(@ModelAttribute PaymentEntity paymentEntity) {
+        veronikaService.savePayment(paymentEntity);
+        return "redirect:/";
+    }
+
 
 }
