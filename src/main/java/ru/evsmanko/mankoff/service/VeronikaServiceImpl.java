@@ -9,7 +9,6 @@ import ru.evsmanko.mankoff.repository.CreditRepository;
 import ru.evsmanko.mankoff.repository.PaymentRepository;
 import ru.evsmanko.mankoff.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,12 +39,12 @@ public class VeronikaServiceImpl implements VeronikaService {
     }
 
     @Override
-    public ArrayList<PaymentEntity> getAllPayments() {
+    public List<PaymentEntity> getAllPayments() {
         return paymentRepository.findAll();
     }
 
     @Override
-    public ArrayList<PaymentEntity> getAllByShopperId(long shopperId) {
+    public List<PaymentEntity> getAllByShopperId(long shopperId) {
         return paymentRepository.findAllByShopperId(shopperId);
     }
 
