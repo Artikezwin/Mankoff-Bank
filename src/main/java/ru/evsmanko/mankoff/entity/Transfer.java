@@ -12,7 +12,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Transfer {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
     @Column(name = "RECEIVER_ID")
