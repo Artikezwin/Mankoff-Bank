@@ -13,18 +13,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TransferRepositoryImpl implements TransferRepository {
     private final JdbcTemplate jdbcTemplate;
+    private final String SELECT_ALL_FROM_TABLE = "select * from TRANSFER";
+    private final String SELECT_FROM_TABLE_WHERE_SENDER_ID = "select * from TRANSFER where SENDER_ID=?";
+    private final String INSERT_INTO_TABLE = "insert into TRANSFER (ID, RECEIVER_ID, SENDER_ID, SUM, TIMESTAMP) values (?, ?, ?, ?, ?)";
 
     @Override
     public List<Transfer> findAll() {
         return jdbcTemplate.query(
-                "select * from TRANSFER",
+                SELECT_ALL_FROM_TABLE,
                 this::mapRowToTransfer);
     }
 
     @Override
     public List<Transfer> findTransfersBySenderId(long senderId) {
         List<Transfer> transfers = jdbcTemplate.query(
-                "select * from TRANSFER where SENDER_ID=?",
+                SELECT_FROM_TABLE_WHERE_SENDER_ID,
                 this::mapRowToTransfer, senderId);
         return transfers;
     }
@@ -33,7 +36,7 @@ public class TransferRepositoryImpl implements TransferRepository {
     public Transfer save(Transfer transfer) {
 
         List<Transfer> transfers = findAll();
-        long vremId = 1;
+        long vremId = 0;
         if (!transfers.isEmpty()) {
             for (int i = 0; i < transfers.size(); i++) {
                 if (vremId < transfers.get(i).getId()) {
@@ -43,7 +46,7 @@ public class TransferRepositoryImpl implements TransferRepository {
         }
 
         jdbcTemplate.update(
-                "insert into TRANSFER (ID, RECEIVER_ID, SENDER_ID, SUM, TIMESTAMP) values (?, ?, ?, ?, ?)",
+                INSERT_INTO_TABLE,
                 vremId + 1,
                 transfer.getReceiverId(),
                 transfer.getSenderId(),
