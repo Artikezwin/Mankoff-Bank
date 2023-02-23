@@ -2,6 +2,8 @@ package ru.evsmanko.mankoff.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Target;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.sql.Timestamp;
 
@@ -12,7 +14,8 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Transfer {
     @Id
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", nullable = false)
     private Long id;
     @Column(name = "RECEIVER_ID")
     private Long receiverId;
