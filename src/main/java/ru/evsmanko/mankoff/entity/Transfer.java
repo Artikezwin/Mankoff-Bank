@@ -2,8 +2,6 @@ package ru.evsmanko.mankoff.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Target;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.sql.Timestamp;
 
@@ -24,6 +22,6 @@ public class Transfer {
     @Column(name = "SUM")
     private float sum;
     @Column(name = "TIMESTAMP")
-    private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    private Timestamp timestamp;
 
 }
