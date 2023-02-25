@@ -12,7 +12,8 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Transfer {
     @Id
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", nullable = false)
     private Long id;
     @Column(name = "RECEIVER_ID")
     private Long receiverId;
@@ -21,6 +22,6 @@ public class Transfer {
     @Column(name = "SUM")
     private float sum;
     @Column(name = "TIMESTAMP")
-    private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    private Timestamp timestamp;
 
 }
