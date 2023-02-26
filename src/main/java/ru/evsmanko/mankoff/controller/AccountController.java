@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.evsmanko.mankoff.dto.PaymentDTO;
 import ru.evsmanko.mankoff.dto.TransferDTO;
 import ru.evsmanko.mankoff.dto.UserDTO;
 import ru.evsmanko.mankoff.entity.PaymentEntity;
@@ -14,9 +15,11 @@ import ru.evsmanko.mankoff.repository.TransferRepository;
 import ru.evsmanko.mankoff.service.GregoryService;
 import ru.evsmanko.mankoff.service.VeronikaService;
 import ru.evsmanko.mankoff.service.mapper.MappingUtils;
+import ru.evsmanko.mankoff.service.mapper.PaymentMapper;
 import ru.evsmanko.mankoff.service.mapper.TransferMapper;
 
 import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +31,11 @@ public class AccountController {
     private final GregoryService gregoryService;
     private final MappingUtils mappingUtils;
     private final TransferRepository transferRepository;
+    private final PaymentMapper paymentMapper;
+
     @Autowired
     private TransferMapper transferMapper;
+
 
     @GetMapping("/user/{id}")
     public String userInformation(Model model, @PathVariable("id") long id) {
@@ -95,12 +101,18 @@ public class AccountController {
 
     @GetMapping("/payments/{id}")
     public String paymentByShopperId(Model model, @PathVariable("id") long id) {
-        model.addAttribute("payments", veronikaService.getAllByShopperId(id));
+        List<PaymentEntity> paymentList = veronikaService.getAllByShopperId(id);
+        List<PaymentDTO> paymentDTOList = new ArrayList<>();
+        for (PaymentEntity payment : paymentList) {
+            paymentDTOList.add(paymentMapper.paymentToPaymentDto(payment));
+        }
+        model.addAttribute("payments", paymentDTOList);
         return "user-payments";
     }
 
     @PostMapping("/payment/add")
-    public String savePayment(@ModelAttribute PaymentEntity paymentEntity) {
+    public String savePayment(@RequestBody PaymentDTO paymentDTO) {
+        PaymentEntity paymentEntity = paymentMapper.paymentDtoToPayment(paymentDTO);
         veronikaService.savePayment(paymentEntity);
         return "redirect:/";
     }
