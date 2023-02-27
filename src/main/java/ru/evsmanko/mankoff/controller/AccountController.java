@@ -4,6 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.*;
 import ru.evsmanko.mankoff.dto.PaymentDTO;
 import ru.evsmanko.mankoff.dto.TransferDTO;
@@ -14,10 +18,10 @@ import ru.evsmanko.mankoff.entity.User;
 import ru.evsmanko.mankoff.repository.TransferRepository;
 import ru.evsmanko.mankoff.service.GregoryService;
 import ru.evsmanko.mankoff.service.VeronikaService;
+import ru.evsmanko.mankoff.service.mapper.UserMapper;
 import ru.evsmanko.mankoff.service.mapper.MappingUtils;
 import ru.evsmanko.mankoff.service.mapper.PaymentMapper;
 import ru.evsmanko.mankoff.service.mapper.TransferMapper;
-
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
@@ -29,7 +33,7 @@ public class AccountController {
 
     private final VeronikaService veronikaService;
     private final GregoryService gregoryService;
-    private final MappingUtils mappingUtils;
+    private final UserMapper userMapper;
     private final TransferRepository transferRepository;
     private final PaymentMapper paymentMapper;
 
@@ -39,14 +43,14 @@ public class AccountController {
 
     @GetMapping("/user/{id}")
     public String userInformation(Model model, @PathVariable("id") long id) {
-        UserDTO userDTO = mappingUtils.mapToUserDto(veronikaService.getUserInformationById(id));
+        UserDTO userDTO = userMapper.userToUserDto(veronikaService.getUserInformationById(id));
         model.addAttribute("userInformation", userDTO);
         return "user-information";
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute UserDTO userDTO) {
-        User user = mappingUtils.mapToUserEntity(userDTO);
+    public String saveUser(@RequestBody UserDTO userDTO) {
+        User user = userMapper.userDtoToUser(userDTO);
         gregoryService.saveUser(user);
         return "redirect:/";
     }
