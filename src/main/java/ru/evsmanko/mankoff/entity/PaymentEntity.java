@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
@@ -13,13 +14,13 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "payment")
+@Table(name = "payments")
 public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private long shopperId;
     private long MCC;
-    private double amount;
+    private BigDecimal amount;
     private Timestamp timeStamp;
 }

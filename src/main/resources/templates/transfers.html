@@ -9,7 +9,7 @@
 <ul>
     <div th:each="transfer : ${transfers}">
         <li>
-            <p th:href="@{get-transfers/{id}(id=${transfer.getTransferId()})}" th:text="${transfer.toString()}"> Название </p>
+            <p th:href="@{get-transfers/{id}(id=${transfer.getId()})}" th:text="${transfer.toString()}"> Название </p>
         </li>
     </div>
 </ul>
